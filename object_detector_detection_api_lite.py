@@ -7,7 +7,7 @@ from object_detector_detection_api import ObjectDetectorDetectionAPI, \
 
 
 class ObjectDetectorLite(ObjectDetectorDetectionAPI):
-    def __init__(self, model_path='detect.tflite'):
+    def __init__(self, model_path='ssd_mobilenet_v1.tflite'):
         """
             Builds Tensorflow graph, load model and labels
         """
@@ -16,7 +16,7 @@ class ObjectDetectorLite(ObjectDetectorDetectionAPI):
         self._load_label(PATH_TO_LABELS, NUM_CLASSES, use_disp_name=True)
 
         # Define lite graph and Load Tensorflow Lite model into memory
-        self.interpreter = tf.contrib.lite.Interpreter(
+        self.interpreter = tf.lite.Interpreter(
             model_path=model_path)
         self.interpreter.allocate_tensors()
         self.input_details = self.interpreter.get_input_details()
